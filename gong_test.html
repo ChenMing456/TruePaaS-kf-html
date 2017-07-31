@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>工单</title>
+    <link type="text/css" href="./vender/bootstrap-3.3.7-dist/css/bootstrap.min.css" rel="stylesheet" >
+</head>
+
+<body>
+<!--  工单页面  -->
+<div class="workOrder-wrap" >
+    <div class="gongdan container">
+        <!--工单头部-->
+        <div class="gongdan-header row">
+            <a id='close'>×</a>
+            <span style="text-align: center ;margin-left: 43%;font-size: 20px">工单填写</span>
+        </div>
+
+    <div style="margin: 15px 10px 0 0">
+        <!--工单内容-->
+        <div  class="row  " style="top: 10px"><p><span class="col-md-3 ">标题：</span></p><input type="text" class="title col-md-9 "></input> </div>
+        <div  class="row"><p><span class="col-md-3">需求类型：</span></p>
+            <label class="checkbox-inline">
+                <input type="radio" name="optionsRadiosinline"  value="option1" checked> 空间扩容
+            </label>
+            <label class="checkbox-inline">
+                <input type="radio" name="optionsRadiosinline"   value="option2"> 意见反馈
+            </label>
+            <label class="checkbox-inline">
+                <input type="radio" name="optionsRadiosinline"   value="option2"> Bug
+            </label>
+        </div>
+        <div  class="row"><p><span class="col-md-3">选择模板：</span></p>
+            <select class="title col-md-9">
+                <option >请选择模板..</option>
+                <option >单个空间扩容</option>
+                <option >空间统一扩容</option>
+            </select>
+        </div>
+        <div  class="row"><p><span class="col-md-3">需求描述：</span></p>
+            <textarea class="require_display col-md-9" placeholder="请严格按照模板要求进行填写，否则将会被工作人员打回"></textarea>
+        </div>
+        <div  class="row">
+            <p><span class="col-md-3">相关截图：</span></p>
+            <div class="gongdan_img col-md-4" ></div>
+            <button id="upload_img" type="submit" class="btn btn-default" style="margin-left: 10px">点击上传</button>
+            <button type="submit" class="btn btn-default">取消</button>
+        </div>
+        <div  class="row">
+            <p><span class="col-md-3">申请人：</span></p><input type="text" placeholder="姓名" class="gongdan_name col-md-3">
+        </div>
+        <div  class="row">
+            <p><span class="col-md-3">联系方式：</span></p><input type="text" placeholder="联系电话" class="phone col-md-3">
+        </div>
+
+        <input class="btn btn-default workOrder-sub" id='workOrder-sub' type="submit" value="提交">
+    </div>
+    </div>
+</div>
+</body>
+<style>
+    /*工单页面的css样式*/
+    /* close */
+    #close {
+        color: white;
+        font-size: 45px;
+        position: fixed;
+        right: 31%;
+        top: 1%;
+    }
+
+    #close:hover {
+        color: black;
+        text-decoration: none;
+    }
+    /*��ɫ���ֲ�*/
+    .workOrder-wrap {
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.2);
+        position: fixed;
+        left: 0;
+        top: 0;
+        z-index: 100;
+    }
+    /*������*/
+    .gongdan {
+        /*padding-top: 25px;*/
+        padding: 0;
+        margin-top: 10px ;
+        height: 700px;
+        width: 600px;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #fff;
+        border: 2px solid #87CEFF;
+        border-radius: 15px;
+        z-index: 999;
+    }
+    .gongdan-header{
+        height: 50px;
+        background-color:#87CEFF ;
+        border-radius: 10px 10px 0 0;
+    }
+    .row {
+        width: 100%;
+        padding: 10px;
+        min-height: 15px;
+        margin-right: 0;
+        margin-left: 0;
+    }
+
+    .col-md-3 {
+        padding-top: 5px;
+        text-align: right;
+        font-size: 15px;
+    }
+
+    .require_display {
+        height: 100px;
+    }
+
+    .gongdan_img {
+        height: 60px;
+        width: 60px;
+        border: solid 1px black;
+    }
+
+    .gongdan_name,.title,
+    .phone {
+        height: 28px;
+        text-align: left;
+
+    }
+
+    .workOrder-sub {
+        width: 80px;
+        margin-top: 15px;
+        margin-left: 45%;
+        color: white;
+        background-image: linear-gradient(to bottom, #108cee, #0765e4);
+    }
+
+    .icon-gongDan {
+        cursor: pointer;
+        font-size: 18px;
+        color: #286090;
+    }
+</style>
+<script src='./vender/jquery-3.1.1.js'></script>
+<script src="./vender/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+<script>
+    document.getElementById('upload_img').onclick = function () {
+        if (this.files.length != 0) {
+            var file = this.files[0],
+                reader = new FileReader();
+            if (!reader) {
+                that._displayNewMsg('系统消息', '你的浏览器不支持读文件，请升级！', 'red');
+                this.value = '';
+                return;
+            };
+            var photoType = $(this).val().substring($(this).val().lastIndexOf(".") + 1).toLowerCase();
+            if (photoType != 'png' && photoType != 'gif' && photoType != 'jpg' && photoType != 'svg' && photoType != 'jpeg') {
+                alert('请选择正确的图片格式');
+                return;
+            }
+            reader.onload = function(e) {
+                this.value = '';
+                displayImage(e.target.result);
+            };
+            // 将图片作为base-64解析
+            reader.readAsDataURL(file);
+        }
+    };
+
+</script>
+</html>

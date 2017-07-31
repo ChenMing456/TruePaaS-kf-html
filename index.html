@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>聊天客户端</title>
+    <link type="text/css" href="./vender/bootstrap-3.3.7-dist/css/bootstrap.min.css" rel="stylesheet" >
+    <link rel="stylesheet" href="./css/style.min.css">
+    <link rel="stylesheet" href="./css/workOrder.css">
+  </head>
+
+  <body>
+    <div class="chat_wrap">
+      <!-- 头部 -->
+      <div class="chat_header_wrap">
+        <!-- 头部消息 -->
+        <div class="header_text">
+          <p>新消息</p>
+        </div>
+        <!-- 头部图标 -->
+          <i class='iconfont icon_setLogo'>&#xe70d;</i>
+        <i class='iconfont icon_cancelLogo'>&#xe603;</i>
+      </div>
+        <!-- 主消息区 -->
+        <div class="historyMsg clearfix">
+          <!-- 客服列表   -->
+          <div class="kefu-list clearfix">
+            <div class="kf">
+              <div class="kf-img">
+                <img class="image" src="./img/kefu/1.png">
+              </div>
+              <div class="kf-name">客服1</div>
+            </div>
+
+            <div class="kf">
+              <div class="kf-img">
+                <img class="image" src="./img/kefu/2.png">
+              </div>
+              <div class="kf-name">客服2</div>
+            </div>
+
+            <div class="kf">
+              <div class="kf-img">
+                <img class="image" src="./img/kefu/3.png">
+              </div>
+              <div class="kf-name">客服3</div>
+            </div>
+            <div class="welcome">
+              欢迎咨询,请问有什么可以帮助您吗？
+            </div>
+          </div>
+          <!-- 客服列表结束 -->
+          <!-- 消息展示区 -->
+        </div>
+
+<!-- 下部发送消息区 -->
+     <div class="footer_msg">
+       <!-- 用span高度来填充文本域 -->
+       <div class="animateShowFooter">
+         <div class="expandingArea">
+           <pre><span></span><br></pre>
+           <!-- 文本域 -->
+           <textarea name="name" id='textarea_text' rows="1" cols="80" placeholder="填写消息 回车发送 "></textarea>
+         </div>
+         <label for="photoLogo">
+           <i class='iconfont icon_photoLogo'>&#xe6ee;</i>
+         </label>
+         <input type="file" class='photoLogo' id='photoLogo'>
+         <i class='iconfont icon_emojiLogo' id='emojiLogo'>&#xe60c;</i>
+       </div>
+  <!-- 表情包含区 -->
+  <div class="emojiWrapper" id='emojiWrapper'>
+
+  </div>
+</div>
+
+
+
+
+<!--点击返回之后的历史聊天记录模板  -->
+<div class="Truepaas">
+  <!-- 在线聊天过的客服区 -->
+<div class="TruepaasKefu clearfix">
+  <div class="kefuLeft">
+    <img src="./img/kefu/1.png" alt="1号客服">
+  </div>
+  <div class="kefuRight">
+    <p class="kefuName">1号客服</p>
+      <p class="lastMsg">你好！</p>
+      <span class="lastTime">1小时前</span>
+  </div>
+</div>
+<div class="TruepaasKefu clearfix">
+  <div class="kefuLeft">
+    <img src="./img/kefu/1.png" alt="1号客服">
+  </div>
+  <div class="kefuRight">
+    <p class="kefuName">1号客服</p>
+      <p class="lastMsg">你好！</p>
+      <span class="lastTime">1小时前</span>
+  </div>
+</div>
+<!-- 点击按钮写新消息 -->
+  <button class='writeMsg' type="button" name="button">
+    新消息
+  </button>
+</div>
+ </div>
+<!--  工单页面  -->
+    <div class="workOrder-wrap" style="display: none" >
+      <div class="gongdan container">
+        <!--工单头部-->
+        <div class="gongdan-header row">
+          <a id='close'>×</a>
+          <span style="text-align: center ;margin-left: 43%;font-size: 20px">工单填写</span>
+        </div>
+
+        <div style="margin: 15px 10px 0 0">
+          <!--工单内容-->
+          <div  class="row  " style="top: 10px"><p><span class="col-md-3 ">标题：</span></p><input type="text" class="title col-md-9 "></input> </div>
+          <div  class="row"><p><span class="col-md-3">需求类型：</span></p>
+            <label class="checkbox-inline">
+              <input type="radio" name="optionsRadiosinline"  value="option1" checked> 空间扩容
+            </label>
+            <label class="checkbox-inline">
+              <input type="radio" name="optionsRadiosinline"   value="option2"> 意见反馈
+            </label>
+            <label class="checkbox-inline">
+              <input type="radio" name="optionsRadiosinline"   value="option2"> Bug
+            </label>
+          </div>
+          <div  class="row"><p><span class="col-md-3">选择模板：</span></p>
+            <select class="title col-md-9">
+              <option >请选择模板..</option>
+              <option >单个空间扩容</option>
+              <option >空间统一扩容</option>
+            </select>
+          </div>
+          <div  class="row"><p><span class="col-md-3">需求描述：</span></p>
+            <textarea class="require_display col-md-9" placeholder="请严格按照模板要求进行填写，否则将会被工作人员打回"></textarea>
+          </div>
+          <div  class="row">
+            <p><span class="col-md-3">相关截图：</span></p>
+            <p class="preview-img">
+              <img id="preview" alt="" name="pic" />
+            </p>
+            <label for="upload_img">
+              <div class="button-upload">点击上传</div>
+            </label>
+            <input type="file" id="upload_img" value="点击上传" style="display: none" >
+            <!--<button id="upload_img" type="submit" class="btn btn-default" style="margin-left: 10px">点击上传</button>-->
+            <button id="cancel_upload" type="submit" class="btn btn-default cancel-button">取消</button>
+          </div>
+          <div  class="row">
+            <p><span class="col-md-3">申请人：</span></p><input type="text" placeholder="姓名" class="gongdan_name col-md-3">
+          </div>
+          <div  class="row">
+            <p><span class="col-md-3">联系方式：</span></p><input type="text" placeholder="联系电话" class="phone col-md-3">
+          </div>
+
+          <input class="btn btn-default workOrder-sub" id='workOrder-sub' type="submit" value="提交">
+        </div>
+      </div>
+    </div>
+
+    <!-- 外层聊天图标 -->
+    <div class="chatLogo">
+      <i class='iconfont icon_chatLogo' id='icon_chatLogo'>&#xe60b;</i>
+    </div>
+
+    <!-- 提示格式错误弹出框 -->
+    <div class="alert alert-warning alert-dismissible showAlert" role="alert">
+      请选择正确的图片格式！
+    </div>
+<script src='./vender/jquery-3.1.1.js'></script>
+<script src="./vender/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+<script src='./vender/socket.io.js'></script>
+<script src='./js/main.js'></script>
+<script src='./js/history.js'></script>
+  </body>
+
+</html>
